@@ -28,3 +28,12 @@
     (is (= (get-score "Y") 2))
     (is (= (get-score "Z") 3))
     ))
+
+(deftest test-eval-game
+  (is (= (eval-game ["A" "Y"]) 8))
+  (is (= (eval-game ["B" "X"]) 1))
+  )
+
+(deftest test-puzzle-1
+  (testing "The final solution"
+    (is (= (puzzle-1 (lazy-seq ["A" "Y" ["A" "Y"]] ["A" "Y"])) 24))))

@@ -52,9 +52,9 @@
 
 
 (defn puzzle-1 [v]
-  (prn v)
-  (reduce + (map eval-game v)))
+  (prn (type v))
+  (reduce + 0 (map eval-game v)))
 
-(comment (reduce + (map eval-game [["A" "Y"] ["B" "X"]])))
+(comment (reduce + 0 (map eval-game [["A" "Y"] ["B" "X"]])))
 
 (puzzle-1 pairs)
