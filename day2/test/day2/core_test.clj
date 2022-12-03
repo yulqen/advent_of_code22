@@ -37,3 +37,4 @@
 (deftest test-puzzle-1
   (testing "The final solution"
     (is (= (puzzle-1 (lazy-seq ["A" "Y" ["A" "Y"]] ["A" "Y"])) 24))))
+    (is (= (puzzle-1 (lazy-seq ["A" "Y"] ["A" "Y"] ["A" "Y"])) 24))))
