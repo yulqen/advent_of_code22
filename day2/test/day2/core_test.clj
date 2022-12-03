@@ -40,3 +40,8 @@
       (prn myseq)
      (is (= myseq  24)))))
 
+
+(deftest test-day-2-puzzle
+  (is (= (calc ["A" "Y"]) 4))
+  (is (= (calc ["B" "X"]) 1))
+  (is (= (calc ["C" "Z"]) 7)))

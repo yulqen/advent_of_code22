@@ -15,6 +15,39 @@
 
 (def pairs (map #(str/split % #" ")(str/split-lines(slurp "input.txt"))))
 
+(def score-map
+  {"X" 1
+   "Y" 2
+   "Z" 3})
+
+(defn calc [[opponent-choice required]]
+  (cond
+    (= required "X") (to-loose opponent-choice)
+    (= required "Y") (to-draw opponent-choice)
+    (= required "Z") (to-win opponent-choice)))
+
+(defn to-win [opponent-choice]
+  (cond
+    (= opponent-choice "A") (+ 6 (get score-map "Y"))
+    (= opponent-choice "B") (+ 6 (get score-map "Z"))
+    (= opponent-choice "C") (+ 6 (get score-map "X"))))
+
+(defn to-draw [opponent-choice]
+  (cond
+    (= opponent-choice "A") (+ 3 (get score-map "X"))
+    (= opponent-choice "B") (+ 3 (get score-map "Y"))
+    (= opponent-choice "C") (+ 3 (get score-map "Z"))))
+
+(defn to-loose [opponent-choice]
+  (cond
+    (= opponent-choice "A") (get score-map "Z")
+    (= opponent-choice "B") (get score-map "X")
+    (= opponent-choice "C") (get score-map "Y")))
+
+(defn puzzle-2 [v]
+  (reduce + 0 (map #(calc %) v)))
+
+(puzzle-2 pairs)
 
 (defn game [theirs ours]
   (cond
@@ -51,7 +84,7 @@
 (comment 
   (eval-game ["A" "Y"])
   (eval-game ["B" "X"])
-  (eval-game ["C" "X"]))
+  (eval-game ["C" "Y"]))
 
 (defn puzzle-1 [v]
   (reduce + 0 (map #(eval-game %) v)))
