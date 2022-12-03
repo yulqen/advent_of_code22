@@ -13,7 +13,8 @@
 ;; 3 draw
 ;; 6 win
 
-(def pairs (map vector (str/split-lines(slurp "input.txt"))))
+(def pairs (map #(str/split % #" ")(str/split-lines(slurp "input.txt"))))
+
 
 (defn game [theirs ours]
   (cond
@@ -40,21 +41,19 @@
     (= choice "Y") 2
     (= choice "Z") 3))
 
-(defn eval-game [[theirs ours]]
-  (let [result (game theirs ours)
+(defn eval-game [v]
+  (let [[theirs ours] v
+        result (game theirs ours)
         result-score (evaluate-result result)
         choice-score (get-score ours)]
-    (+ result-score choice-score)))
+          (+ result-score choice-score)))
+
 (comment 
   (eval-game ["A" "Y"])
   (eval-game ["B" "X"])
   (eval-game ["C" "X"]))
 
-
 (defn puzzle-1 [v]
-  (prn (type v))
-  (reduce + 0 (map eval-game v)))
-
-(comment (reduce + 0 (map eval-game [["A" "Y"] ["B" "X"]])))
+  (reduce + 0 (map #(eval-game %) v)))
 
 (puzzle-1 pairs)
