@@ -42,7 +42,9 @@
   (first (item-intersect (set s1) (set s2))))
 
 (defn char-val [char]
-  (if (re-matches #"[a-z]" (str char)) (- (int char) 96) (- (int char) 38)))
+  (if (re-matches #"[a-z]" (str char))
+    (- (int char) 96)
+    (- (int char) 38)))
 
 (defn puzzle-1 [split-strings]
   (let [shared-chars (map comp-compartments split-strings) ; strangely do not have to use reader macro here!
