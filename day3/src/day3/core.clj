@@ -30,8 +30,20 @@
 ;;        (conj res (take 3 coll))))))
 
 (def three-groups (get-three-groups rucksacks))
+(nth three-groups 2)
 
-(apply map set three-groups)
+(defn mapv2 [f coll]
+  (mapv (fn [x] (mapv f x)) coll))
+
+(defn get-unique [[s1 s2 s3]]
+  (set/intersection s1 s2 s3))
+
+(defn make-threegroup-into-sets [coll]
+  (let [sets (mapv2 set coll)
+        uniques (map get-unique sets)]
+    uniques))
+
+(make-threegroup-into-sets three-groups)
 
 (def t (get-three-groups pairs))
 
