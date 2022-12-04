@@ -15,7 +15,26 @@
   [(first-comp s) (second-comp s)])
 
 (def pairs (map #(split-string %) rucksacks))
-pairs
+
+(defn get-three-groups [coll]
+  (partition 3 1 coll))
+
+;; loop
+;; (defn get-three-groups [coll]
+;;   (loop [i (/ (count coll) 3)
+;;          res []]
+;;     (if (= i (count coll))
+;;       res
+;;       (recur
+;;        (inc i)
+;;        (conj res (take 3 coll))))))
+
+(def three-groups (get-three-groups rucksacks))
+
+(apply map set three-groups)
+
+(def t (get-three-groups pairs))
+
 (defn item-intersect [set1 set2]
   (set/intersection set1 set2))
 
@@ -26,8 +45,8 @@ pairs
   (if (re-matches #"[a-z]" (str char)) (- (int char) 96) (- (int char) 38)))
 
 (defn puzzle-1 [split-strings]
-  (let [shared-chars (map #(comp-compartments %) split-strings)
-        char-vals (map #(char-val %) shared-chars)]
+  (let [shared-chars (map comp-compartments split-strings) ; strangely do not have to use reader macro here!
+        char-vals (map char-val shared-chars)]
     (reduce + 0 char-vals)))
 
 (puzzle-1 pairs)
