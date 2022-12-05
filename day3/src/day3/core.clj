@@ -43,6 +43,9 @@
         uniques (map get-unique sets)]
     uniques))
 
+(defn create-sets [coll]
+  (map set coll))
+
 (make-threegroup-into-sets three-groups)
 
 (def t (get-three-groups pairs))
