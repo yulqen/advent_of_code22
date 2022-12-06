@@ -34,6 +34,22 @@
 
 (get-unique-chars-each-group rucksacks)
 
+(defn make-threegroup-into-sets [coll]
+  (let [sets (mapv2 set coll)
+        uniques (map get-unique sets)]
+    uniques))
+
+(defn create-sets [coll]
+  (map set coll))
+
+(make-threegroup-into-sets three-groups)
+
+(def t (get-three-groups pairs))
+
+(defn item-intersect [set1 set2]
+  (set/intersection set1 set2))
+>>>>>>> 5aa0821ead9d5df8b540f109388afda73256314e
+
 (defn comp-compartments [[s1 s2]]
   (first (item-intersect (set s1) (set s2))))
 

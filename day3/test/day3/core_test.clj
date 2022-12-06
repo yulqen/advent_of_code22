@@ -9,7 +9,7 @@
 
 (deftest test-diff-compartment-contents
   (testing "Get difference between compartments in bag"
-    (is (= #{\h} (comp-compartments ["Cjh" "TTh"])))))
+    (is (= \h (comp-compartments ["Cjh" "TTh"])))))
 
 (deftest test-split-str-in-half
   (testing "Can split even string to vector of two strings"
@@ -20,4 +20,9 @@
     (is (= 1 (char-val \a)))
     (is (= 2 (char-val \b)))
     (is (= 27 (char-val \A)))))
+
+(deftest test-convert-vec-of-strings-to-sets
+  (testing "Convert a vector of strings into three sets"
+    (is (= (#{\a \b \c #{\a \b \c}} #{\a \b \c})
+           (create-sets ["abc" "abc" "abcc"])))))
 
