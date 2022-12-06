@@ -21,10 +21,12 @@
     (is (= 2 (char-val \b)))
     (is (= 27 (char-val \A)))))
 
-(deftest test-convert-vec-of-strings-to-sets
-  (testing "Convert a vector of strings into three sets"
-    (is (= (#{\a \b \c #{\a \b \c}} #{\a \b \c})
-           (create-sets ["abc" "abc" "abcc"])))))
+(deftest intersect-sets
+  (let [s1 (set "Djr")
+        s2 (set "Dr")
+        s3 (set "Djr")]
+    (is (= #{\r} (set/intersection s1 s2 s3))))
+ )
 
 (deftest getting-unique
   (let [data-first ["ABCD" "ABEFG" "HBIJA"]]

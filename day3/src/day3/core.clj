@@ -1,9 +1,26 @@
 (ns day3.core
   (:require
    [clojure.string :as str]
-   [clojure.set :as set]))
+   [clojure.set :as set]
+   [clojure.pprint :as pprint]))
 
 (def rucksacks (str/split-lines (slurp "input.txt")))
+(def pairs (map #(split-string %) rucksacks))
+
+(take 6 pairs)
+
+(map #(map set %) (take 6 pairs))
+
+(defn puzzle-2 []
+  (->>  rucksacks
+        (partition 3)
+        (map #(map set %))
+        (map #(apply set/intersection %))
+        (map first)
+        (filter some?)
+        (map char-val)
+        (reduce + 0)
+        ))
 
 (defn first-comp [s]
     (subs s 0 (/ (count s) 2)))
@@ -13,44 +30,6 @@
 
 (defn split-string [s]
   [(first-comp s) (second-comp s)])
-
-(def pairs (map #(split-string %) rucksacks))
-
-(defn get-three-groups [coll]
-  (partition 3 1 coll))
-
-(defn mapv2 [f coll]
-  (map (fn [x] (map f x)) coll))
-
-(defn get-unique-chars-each-group [sacks]
-  (->> (get-three-groups sacks)
-       (mapv2 set)
-       (map #(apply set/intersection %))
-       (mapv2 char-val)
-       flatten
-       (reduce + 0)
-       ))
-(get-unique-chars-each-group rucksacks)
-
-(distinct [1 2 3 4 4 5])
-
-(let [a (set "ABCDr")
-      b (set "ABCFr")
-      c (set "ABCDEFr")
-      intersec (set/intersection a b c)]
-  (set/difference c intersec))
-
-(defn make-threegroup-into-sets [coll]
-  (let [sets (mapv2 set coll)
-        uniques (map get-unique sets)]
-    uniques))
-
-(defn create-sets [coll]
-  (map set coll))
-
-(make-threegroup-into-sets three-groups)
-
-(def t (get-three-groups pairs))
 
 (defn item-intersect [set1 set2]
   (set/intersection set1 set2))
