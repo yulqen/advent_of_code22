@@ -19,36 +19,20 @@
 (defn get-three-groups [coll]
   (partition 3 1 coll))
 
-;; loop
-;; (defn get-three-groups [coll]
-;;   (loop [i (/ (count coll) 3)
-;;          res []]
-;;     (if (= i (count coll))
-;;       res
-;;       (recur
-;;        (inc i)
-;;        (conj res (take 3 coll))))))
-
-(def three-groups (get-three-groups rucksacks))
-(nth three-groups 2)
-
 (defn mapv2 [f coll]
-  (mapv (fn [x] (mapv f x)) coll))
+  (map (fn [x] (map f x)) coll))
 
-(defn get-unique [[s1 s2 s3]]
-  (set/intersection s1 s2 s3))
+(defn get-unique-chars-each-group [sacks]
+  (->> (get-three-groups sacks)
+       (mapv2 set)
+       (map
+        #(apply set/intersection %))
+       (mapv2 char-val)
+       flatten
+       (reduce + 0)
+       ))
 
-(defn make-threegroup-into-sets [coll]
-  (let [sets (mapv2 set coll)
-        uniques (map get-unique sets)]
-    uniques))
-
-(make-threegroup-into-sets three-groups)
-
-(def t (get-three-groups pairs))
-
-(defn item-intersect [set1 set2]
-  (set/intersection set1 set2))
+(get-unique-chars-each-group rucksacks)
 
 (defn comp-compartments [[s1 s2]]
   (first (item-intersect (set s1) (set s2))))
