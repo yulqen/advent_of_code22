@@ -48,7 +48,6 @@
 
 (defn item-intersect [set1 set2]
   (set/intersection set1 set2))
->>>>>>> 5aa0821ead9d5df8b540f109388afda73256314e
 
 (defn comp-compartments [[s1 s2]]
   (first (item-intersect (set s1) (set s2))))
