@@ -26,3 +26,13 @@
     (is (= (#{\a \b \c #{\a \b \c}} #{\a \b \c})
            (create-sets ["abc" "abc" "abcc"])))))
 
+(deftest getting-unique
+  (let [data-first ["ABCD" "ABEFG" "HBIJA"]]
+    (is (= 27 (get-unique-chars-each-group data-first)))))
+
+(deftest part2-solution
+  (let [data-first ["vJrwpWtwJgWrhcsFMMfFFhFp" "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL" "PmmdzqPrVvPwwTWBwg"]
+        data-second ["wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn" "ttgJtRGJQctTZtZT" "CrZsJsPPZsGzwwsLwLmpwMDw"]]
+    (is (= 18 (get-unique-chars-each-group data-first)))
+    (is (= 52 (get-unique-chars-each-group data-second)))))
+

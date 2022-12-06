@@ -25,14 +25,20 @@
 (defn get-unique-chars-each-group [sacks]
   (->> (get-three-groups sacks)
        (mapv2 set)
-       (map
-        #(apply set/intersection %))
+       (map #(apply set/intersection %))
        (mapv2 char-val)
        flatten
        (reduce + 0)
        ))
-
 (get-unique-chars-each-group rucksacks)
+
+(distinct [1 2 3 4 4 5])
+
+(let [a (set "ABCDr")
+      b (set "ABCFr")
+      c (set "ABCDEFr")
+      intersec (set/intersection a b c)]
+  (set/difference c intersec))
 
 (defn make-threegroup-into-sets [coll]
   (let [sets (mapv2 set coll)
