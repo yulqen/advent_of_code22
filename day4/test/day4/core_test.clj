@@ -24,6 +24,7 @@
   (is (vec-fits [[1] [1 2]]))
   (is (not (vec-fits [[8 9 10] [1 2]])))
   (is (vec-fits [[98 99 100 101] [99 100]]))
+  (is (vec-fits [[99 100] [99]]))
   (is (not (vec-fits [[98 99] [99 100]])))
   (is (vec-fits [[16 17] [14 15 16 17 18 19]]))
   (is (not (vec-fits [[16 17] [16 17]])))
