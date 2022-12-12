@@ -19,6 +19,7 @@
     (is (= [[1 2 3 4] [3 4 5 6 7]] (parse-pair "1-4,3-7")))))
 
 (deftest set-inside-the-other
+  (is (vec-fits [[1 2 3 4] [2]]))
   (is (not (vec-fits [[10 11 12] [7 8 9 10]])))
   (is (vec-fits [[1 2 3 4 5 6] [2 3 4 5]]))
   (is (vec-fits [[3 4] [2 3 4 5]]))
@@ -30,6 +31,8 @@
   (is (vec-fits [[100 101 102] [101]]))
   (is (not (vec-fits [[1] [10 11 12]])))
   (is (not (vec-fits [[8 9 10] [1 2]])))
+  (is (vec-fits [[100 101 103 104 105] [103 104]]))
+  (is (not (vec-fits [[100 101 103 104 105] [100 101]])))
   (is (vec-fits [[98 99 100 101] [99 100]]))
   (is (not (vec-fits [[99 100] [99]])))
   (is (not (vec-fits [[98 99] [99 100]])))
