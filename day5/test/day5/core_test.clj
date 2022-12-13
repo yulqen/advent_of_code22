@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [day5.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest data-line
+  (is (= (parse-data-line "[Q]         [N]             [N]    ") [\Q \space \space \N \space \space \space \N \space])))
+
