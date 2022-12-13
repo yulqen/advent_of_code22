@@ -11,7 +11,7 @@
 
 (defn create-stacks [data]
   (for [s [0 1 2 3 4 5 6 7 8]]
-    (mapv (fn [x] (nth x s)) data)))
+    (map (fn [x] (nth x s)) data)))
 
 
 
